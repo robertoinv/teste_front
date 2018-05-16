@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>	
+		<title>Site teste - Roberto Nunes Siqueira</title>
+		
+		<meta charset="utf-8" /> 
+		<meta name="description" content="Site teste">		
+		<meta name="author" content="Roberto Nunes Siqueira">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<style type="text/css">
+			body{
+				background-color: #000;
+				color: #fff;
+			}
+			#images {
+				width: 100%;
+				text-align: center;
+			}
+			#images img {
+				margin: 20px;
+				border: 4px solid #fff;
+			}
+		</style>
+
+		<script src="js/jquery-3.3.1.min.js" ></script>
+
+		<script>						
+			var qtd_fotos = 6;
+
+			$(document).ready(function(){
+				//API do Flickr com jQuery
+				$.getJSON('http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=?',
+                function(data) {
+                    $.each(data.items, function(i, item) {
+                    	if (i < qtd_fotos) {
+                        	var objImg = new Image();
+                        	$(objImg).attr("src", item.media.m);
+                        	$("#images").append($(objImg));
+                        }
+                    });
+                });			
+			});
+		</script>
+	</head>
+	<body>				
+		<h1>API do Flickr com jQuery</h1>
+		<h1>Roberto Nunes Siqueira</h1>		
+		<div id="images"></div>
+	</body>
+</html>
